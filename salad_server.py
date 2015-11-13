@@ -10,20 +10,23 @@ import SimpleHTTPServer
 import SocketServer
 import cgi
 import json
+#import urlparse
 
 PORT = 8818
 
 class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
     def do_GET(self):
-        self.log_message("======= GETTING =======")
-        self.log_message("HEADERS: " + json.dumps(dict(self.headers)))
+        if ".html" in self.path: # only log messages for html pages, not images and scripts
+            self.log_message("GETTING: " + self.path)
+            self.log_message("HEADERS: " + json.dumps(dict(self.headers)))
         SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
 
     def do_POST(self):
-        self.log_message("======= POSTING =======")
+        self.log_message("POSTING: " + self.path)
         self.log_message("HEADERS: " + json.dumps(dict(self.headers)))
 
+        # READ FORM DATA ...
         form = cgi.FieldStorage(
             fp=self.rfile,
             headers=self.headers,
@@ -33,15 +36,20 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             }
         )
 
+        # TRANSFORM FORM DATA ...
         form_dict = {}
         for attribute in form.list:
             form_dict[attribute.name] = attribute.value
         self.log_message("POSTED DATA: " + json.dumps(form_dict))
 
-        # TODO: store data in database depending on which page was posted to
-        #title = form['title'].value
-        #calories = form['calories'].value # int(form['calories'].value)
-        #description = form['description'].value
+        # STORE FORM DATA IN DATABASE ...
+        if self.path == "/menu-items/new.html":
+            self.log_message("STORING: " + json.dumps(form_dict))
+            title = form['title'].value
+            calories = form['calories'].value # int(form['calories'].value)
+            description = form['description'].value
+            #TODO: db insert statement
+            self.log_message("STORING")
 
         SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
 
