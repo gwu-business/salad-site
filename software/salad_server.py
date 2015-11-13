@@ -45,9 +45,14 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         # STORE FORM DATA IN DATABASE ...
         if self.path == "/menu-items/new.html":
             self.log_message("STORING: " + json.dumps(form_dict))
+
+
+            
             title = form['title'].value
             calories = form['calories'].value # int(form['calories'].value)
             description = form['description'].value
+
+
             #TODO: db insert statement
             self.log_message("STORED")
             # REDIRECT TO MENU INDEX
