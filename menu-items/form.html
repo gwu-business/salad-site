@@ -20,31 +20,71 @@
 
     <div class="page">
       <h1>Add a new Menu Item</h1>
-      <form action="index.html" method="post">
-        <textarea name="description-input" rows="8" cols="40"></textarea>
+
+
+
+
+
+
+
+
+
+      <form id="submission-form" action="index.html" method="post">
+        <label for="title">Title:</label>
+          <input id="title-input" type="text" name="title" value="Super Salad" placeholder="Super Salad">
+        <label for="calories">Calories:</label>
+          <input id="calories-input" type="number" name="calories" value="570">
+        <label for="description">Description:</label>
+          <textarea id="description-input" name="description" rows="8" cols="40" placeholder="A refreshing mix of greens.">A refreshing mix of greens.</textarea>
         <button id="submission-button" type="button" name="button">Submit</button>
       </form>
-      <form action="endpoint.html" method="get">
+
+
+
+      <form action="new.html" method="get">
         <input name="say" value="Hi">
         <button>Get my greetings</button>
       </form>
-      <form action="endpoint.html" method="post">
+
+
+      <form action="new.html" method="post">
         <input name="say" value="Hi">
         <button>Post my greetings</button>
       </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
 
     <script type="text/javascript">
       var hostName = window.location.hostname || "UNKOWN HOST"
+      var newMenuItemPath = "/menu-items/new"
       console.log(hostName)
-      var newMenuItemPath = "/menu_items/new"
-      console.log(newMenuItemPath)
 
+      var titleInput = document.getElementById("title-input")
+      var caloriesInput = document.getElementById("calories-input")
+      var descriptionInput = document.getElementById("description-input")
+
+      //var submissionForm = document.getElementById("submission-form")
       var submissionButton = document.getElementById("submission-button")
       submissionButton.addEventListener("click", submitForm, false)
 
       function submitForm(){
-        var menuItem = {name: "SUPER SALAD", calories: 570, description: "A refreshing mix of greens."}
+        var menuItem = {
+          title: titleInput.value,
+          calories: caloriesInput.value,
+          description: descriptionInput.value
+        }
         console.log("SUBMITTING", menuItem, "TO", newMenuItemPath)
       }
     </script>
