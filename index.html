@@ -3,28 +3,32 @@
   <head>
     <meta charset="utf-8">
     <title>Salad Site</title>
+    <style>
+      nav {display:inline;}
+      p#company-name {display:inline; font-size: 24px;}
+      ul#navigation-list {display:inline;}
+      ul#navigation-list li {display:inline; list-style-type: none;}
+      div.page {height:200px;}
+    </style>
   </head>
   <body>
 
     <header>
-      <img src="images/salad-icon.png" alt="a picture of a salad" />
+      <img src="images/salad-icon.png" alt="a picture of a salad" height="36px"/>
+      <p id="company-name">Urban Lunch Company</p>
       <nav>
-        <ul>
-          <li><a href="index.html">HOME</a></li>
-          <li><a href="menu-item-form.html">ADD MENU ITEM</a></li>
-          <li><a href="#">ADD MENU</a></li>
+        <ul id="navigation-list">
+          <li><a href="index.html">Home</a></li> |
+          <li><a href="menu-items/index.html">Menu</a></li> |
+          <li><a href="menu-items/form.html">Add Item</a></li>
         </ul>
       </nav>
     </header>
 
-    <div>
-      <h1>Salad Menu</h1>
-      <ul>
-        <li>todo: item 1</li>
-        <li>todo: item 2</li>
-        <li>todo: item 3</li>
-      </ul>
+    <div class="page">
+
     </div>
+
     <footer>
       <a href="#">view</a> |
       <a href="#">source</a>
@@ -32,8 +36,7 @@
 
     <script type="text/javascript">
       var hostName = window.location.hostname || "UNKOWN HOST"
-      var newMenuItemPath = "/menu_items/new"
-      console.log(hostName, newMenuItemPath)
+      console.log(hostName)
     </script>
   </body>
 </html>
