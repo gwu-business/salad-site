@@ -49,7 +49,12 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             calories = form['calories'].value # int(form['calories'].value)
             description = form['description'].value
             #TODO: db insert statement
-            self.log_message("STORING")
+            self.log_message("STORED")
+            # REDIRECT TO MENU INDEX
+            self.log_message("REDIRECTING")
+            self.send_response(301)
+            self.send_header('Location',"/menu-items/index.html")
+            self.end_headers()
 
         SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
 

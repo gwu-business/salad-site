@@ -16,3 +16,4 @@
  + http://www.cs.sfu.ca/CourseCentral/165/common/guide/html/sec-cgi.html
  + https://snipt.net/raw/f8ef141069c3e7ac7e0134c6b58c25bf/?nice
  + [writing posted data to file](http://stackoverflow.com/a/25361432/670433)
+ + [forwarding with python simpleserver](http://stackoverflow.com/questions/2506932/how-do-i-forward-a-request-to-a-different-url-in-python)
