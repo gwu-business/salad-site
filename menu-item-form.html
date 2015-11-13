@@ -18,12 +18,11 @@
     </header>
 
     <div>
-      <h1>Salad Menu</h1>
-      <ul>
-        <li>todo: item 1</li>
-        <li>todo: item 2</li>
-        <li>todo: item 3</li>
-      </ul>
+      <h1>Add a new Menu Item</h1>
+
+
+      <button id="submission-button" type="button" name="button">Submit</button>
+
     </div>
     <footer>
       <a href="#">view</a> |
@@ -34,6 +33,14 @@
       var hostName = window.location.hostname || "UNKOWN HOST"
       var newMenuItemPath = "/menu_items/new"
       console.log(hostName, newMenuItemPath)
+
+      var submissionButton = document.getElementById("submission-button")
+      submissionButton.addEventListener("click", submitForm, false)
+
+      function submitForm(){
+        var menuItem = {name: "SUPER SALAD", calories: 570, description: "A refreshing mix of greens."}
+        console.log("SUBMITTING", menuItem, "TO", newMenuItemPath)
+      }
     </script>
   </body>
 </html>
