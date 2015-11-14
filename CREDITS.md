@@ -17,3 +17,7 @@
  + https://snipt.net/raw/f8ef141069c3e7ac7e0134c6b58c25bf/?nice
  + [writing posted data to file](http://stackoverflow.com/a/25361432/670433)
  + [forwarding with python simpleserver](http://stackoverflow.com/questions/2506932/how-do-i-forward-a-request-to-a-different-url-in-python)
+ + [Python MySQL library](https://github.com/PyMySQL/PyMySQL)
+ + https://github.com/PyMySQL/PyMySQL#example
+ + https://docs.python.org/2/tutorial/errors.html
+ + https://github.com/gwu-business/istm-4121/blob/394ad2f9d6f5de8b626cc6d81d57a545b342ba3d/notes/database-management/database-management-sql.md
