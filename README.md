@@ -2,6 +2,7 @@
 
 ## Usage
 
+
 Download the repository.
 
 ```` sh
@@ -9,14 +10,11 @@ git clone git@github.com:gwu-business/salad-site.git
 cd salad-site
 ````
 
-Run the scripts in the [database](database) directory in order (create, migrate, populate)
- to create a new MySQL database
- and populate it with data.
+Create a new database
+ and populate it with menu data (requires mysql).
 
 ```` sh
-# if your root user does not have a password:
-# ... run these commands without the -p flag,
-# ... or press enter when prompted for a password ...
+# if your root user does not have a password: run these commands without the -p flag, or press enter when prompted for a password ...
 cat database/create.sql | mysql -u root -p
 mysql -uroot -p salad_db < database/migrate.sql
 mysql -uroot -p salad_db < database/populate.sql
@@ -28,12 +26,21 @@ Install python package dependencies (requires python and pip).
 pip install -r software/requirements.txt
 ````
 
-Start a local web server (requires python).
+Create another menu item record, this time using a python script.
 
 ```` sh
-python software/salad_server.py
+python software/add_menu_item.py
 ````
 
-Visit localhost:8818 in a browser.
+Start a local web server.
+
+```` sh
+python software/start_local_web_server.py
+````
+
+Visit [localhost:8818](localhost:8818) in a browser
+  to view the menu
+  and create new menu items.
+
 
 ## [License](LICENSE.md)
