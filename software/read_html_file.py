@@ -28,7 +28,9 @@ print menu_item_list
 #
 
 for i in [1,2,3,4,5]:
-    list_item = "<li>%(item_name)s</li>" % {"item_name": i}
+    list_item = "<li>%s</li>" % i
     menu_item_list.append(list_item)
 
 print menu_item_list
+
+print soup
