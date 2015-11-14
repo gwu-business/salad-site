@@ -1,1 +1,2 @@
 git+https://github.com/PyMySQL/PyMySQL.git
+beautifulsoup4
