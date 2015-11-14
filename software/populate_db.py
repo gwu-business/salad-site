@@ -1,4 +1,3 @@
-
 # python software/populate_db.py
 # ... source: https://github.com/PyMySQL/PyMySQL#example
 
@@ -19,19 +18,23 @@ connection = pymysql.connect(
 try:
     with connection.cursor() as cursor:
 
-        # CREATE A NEW MENU ITEM
+        # CREATE A NEW MENU ITEM RECORD
 
         sql = "INSERT INTO `menu_items` (`category`,`title`,`calories`,`contains_gluten`,`vegan_safe`,`description`) VALUES (%s, %s, %s, %s, %s, %s)"
-        cursor.execute(sql, ('SignatureSalad', 'TEST SALAD',  1111, 0, 1,  'a salad to use when testing the web application.')            )
+        cursor.execute(sql, ('SignatureSalad', 'TEST SALAD',  1111, 0, 1,  'a salad to use when testing the web application.')  )
 
     connection.commit() # connection is not autocommit by default. So you must commit to save your changes.
 
-    #with connection.cursor() as cursor:
-    #    # Read a single record
-    #    sql = "SELECT `id`, `password` FROM `users` WHERE `email`=%s"
-    #    cursor.execute(sql, ('webmaster@python.org',))
-    #    result = cursor.fetchone()
-    #    print(result)
+    with connection.cursor() as cursor:
+
+        # EXECUTE CUSTOM QUERY TO FIND THE LATEST MENU ITEM RECORD
+
+        sql = "SELECT * FROM menu_items ORDER BY id DESC LIMIT 1"
+        cursor.execute(sql)
+        #result = cursor.fetchone()
+        for row in cursor.fetchall():
+           print(row)
+
 finally:
     connection.close() # always close the connection when finished.
 
