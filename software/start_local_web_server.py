@@ -40,33 +40,43 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
         if self.path == "/menu-items/index.html":
             self.log_message("QUERYING THE DATABASE")
+            menu_items = []
+            #menu_items = [
+            #  {"id":1, "title":"first salad", "description": "a salad"},
+            #  {"id":2, "title":"second salad", "description": "a salad"},
+            #  {"id":3, "title":"third salad", "description": "a salad"}
+            #]
 
-            #### ESTABLISH DATABASE CONNECTION
-            ###connection = pymysql.connect(
-            ###    host='localhost',
-            ###    port=3306,
-            ###    user='root',
-            ###    passwd='y0l0', # or change, or leave blank or comment-out
-            ###    db='salad_db',
-            ###    #charset='utf8mb4',
-            ###    cursorclass=pymysql.cursors.DictCursor
-            ###)
-            #### EXECUTE DATABASE TRANSACTION
-            ###try:
-            ###    # PRINT RECORDS
-            ###    with connection.cursor() as cursor:
-            ###        sql = "SELECT * FROM menu_items ORDER BY id DESC LIMIT 1"
-            ###        cursor.execute(sql)
-            ###        result = cursor.fetchone()
-            ###        print(result)
-            ###finally:
-            ###    connection.close() # for performance
+            # ESTABLISH DATABASE CONNECTION
 
-            menu_items = [
-              {"id":1, "title":"first salad", "description": "a salad"},
-              {"id":2, "title":"second salad", "description": "a salad"},
-              {"id":3, "title":"third salad", "description": "a salad"}
-            ]
+            connection = pymysql.connect(
+                host='localhost',
+                port=3306,
+                user='root',
+                passwd='y0l0', # or change, or leave blank or comment-out
+                db='salad_db',
+                #charset='utf8mb4',
+                cursorclass=pymysql.cursors.DictCursor
+            )
+
+            # EXECUTE DATABASE TRANSACTION
+
+            try:
+
+                # GET MENU ITEM RECORDS
+
+                with connection.cursor() as cursor:
+                    sql = "SELECT * FROM menu_items ORDER BY id DESC LIMIT 100"
+                    cursor.execute(sql)
+                    for row in cursor.fetchall():
+                        print(row)
+                        menu_items.append(row)
+
+            finally:
+
+                connection.close() # for performance
+
+            # READ HTML FILE
 
             menu_dot_html = os.path.abspath(__file__).replace(os.path.relpath(__file__), "menu-items/index.html")
             print "READING HTML FILE -- %s" % menu_dot_html
@@ -125,12 +135,12 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
             # TRANSFORM DATA
 
-            category = "SpecialSalad"
+            category = "SpecialSalad" #todo: form select
             title = form['title'].value
             calories = form['calories'].value
             calories = int(calories)
-            contains_gluten = True
-            vegan_safe = False
+            contains_gluten = True #todo: form radio
+            vegan_safe = False #todo: form radio
             description = form['description'].value
 
             # ESTABLISH DATABASE CONNECTION
