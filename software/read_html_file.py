@@ -28,7 +28,8 @@ print menu_item_list
 #
 
 for i in [1,2,3,4,5]:
-    list_item = "<li>%s</li>" % i
+    list_item = soup.new_tag('li')
+    list_item.string = str(i)
     menu_item_list.append(list_item)
 
 print menu_item_list

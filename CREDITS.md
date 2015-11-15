@@ -25,4 +25,4 @@
  + [Adding a Node to a DOM Tree Tutorial](http://www.java2s.com/Tutorial/Python/0400__XML/AddingaNodetoaDOMTree.htm)
  + https://www.quora.com/What-is-an-easy-to-use-HTML-XML-parser-generator-library-in-Python-similar-to-Hpricot-Nokogiri-in-Ruby
  + http://www.crummy.com/software/BeautifulSoup/bs4/doc/
- 
+ + http://stackoverflow.com/a/21356230/670433

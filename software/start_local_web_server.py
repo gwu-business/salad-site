@@ -15,18 +15,21 @@ import SimpleHTTPServer
 import SocketServer
 import cgi
 import json
-#import urlparse
 import pymysql.cursors
 import os
 from bs4 import BeautifulSoup
 
 PORT = 8818
 
+#
 # DEFINE THE LOCAL WEB SERVER
+#
 
 class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
+    #
     # OVERWRITE BEHAVIOR OF "GET" REQUESTS
+    #
 
     def do_GET(self):
         if ".html" in self.path: # only log messages for html pages, not images and scripts
@@ -36,10 +39,9 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         # IF GETTING THE MENU PATH, READ MENU ITEMS FROM DATABASE
 
         if self.path == "/menu-items/index.html":
-            #self.log_message("QUERYING THE DATABASE")
+            self.log_message("QUERYING THE DATABASE")
 
             #### ESTABLISH DATABASE CONNECTION
-
             ###connection = pymysql.connect(
             ###    host='localhost',
             ###    port=3306,
@@ -49,34 +51,37 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             ###    #charset='utf8mb4',
             ###    cursorclass=pymysql.cursors.DictCursor
             ###)
-
             #### EXECUTE DATABASE TRANSACTION
-
             ###try:
-
             ###    # PRINT RECORDS
-
             ###    with connection.cursor() as cursor:
             ###        sql = "SELECT * FROM menu_items ORDER BY id DESC LIMIT 1"
             ###        cursor.execute(sql)
             ###        result = cursor.fetchone()
             ###        print(result)
-
             ###finally:
             ###    connection.close() # for performance
 
-            #menu_items = [
-            #  {"id":1, "title":"first salad", "description": "a salad"},
-            #  {"id":2, "title":"second salad", "description": "a salad"},
-            #  {"id":3, "title":"third salad", "description": "a salad"}
-            #]
+            menu_items = [
+              {"id":1, "title":"first salad", "description": "a salad"},
+              {"id":2, "title":"second salad", "description": "a salad"},
+              {"id":3, "title":"third salad", "description": "a salad"}
+            ]
 
             menu_dot_html = os.path.abspath(__file__).replace(os.path.relpath(__file__), "menu-items/index.html")
             print "READING HTML FILE -- %s" % menu_dot_html
-            soup = BeautifulSoup(open(menu_dot_html),"lxml")
-            html_content = soup # "<p>You accessed path: %s</p>" % self.path
+            html_content = BeautifulSoup(open(menu_dot_html),"lxml")
+            menu_item_list = html_content.find(id="menu-item-list")
+            print menu_item_list
 
-            #code.interact(local=locals())
+            # MANIPULATE FILE CONTENTS
+
+            for menu_item in menu_items:
+                list_item = html_content.new_tag('li')
+                list_item.string = menu_item["title"]
+                menu_item_list.append(list_item)
+
+            # RETURN HTML CONTENT
 
             self.send_response(200)
             self.send_header("Content-type", "text/html")
@@ -87,7 +92,9 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
             SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
 
+    #
     # OVERWRITE BEHAVIOR OF "POST" REQUESTS
+    #
 
     def do_POST(self):
         self.log_message("POSTING: " + self.path)
@@ -171,7 +178,9 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
         SimpleHTTPServer.SimpleHTTPRequestHandler.do_GET(self)
 
+#
 # RUN THE LOCAL WEB SERVER
+#
 
 Handler = ServerHandler
 httpd = SocketServer.TCPServer(("", PORT), Handler)
