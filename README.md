@@ -1,7 +1,9 @@
-# Salad Site
+# Salad System (Python Implementation)
+
+An example database-connected web app,
+ with server-side software written in Python.
 
 ## Usage
-
 
 Download the repository.
 
@@ -10,7 +12,7 @@ git clone git@github.com:gwu-business/salad-site.git
 cd salad-site
 ````
 
-Create a new database
+Create a new local database
  and populate it with menu data (requires mysql).
 
 ```` sh
