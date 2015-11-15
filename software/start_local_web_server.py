@@ -103,7 +103,6 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                     menu_item["gluten_free"],
                     menu_item["description"]
                 ]:
-                    #code.interact(local=locals())
                     table_data = html_content.new_tag('td')
                     table_data.string = str(attr_val)
                     table_row.append(table_data)
