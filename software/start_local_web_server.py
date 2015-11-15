@@ -46,11 +46,6 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         if self.path == "/menu-items/index.html":
             self.log_message("QUERYING THE DATABASE")
             menu_items = []
-            #menu_items = [
-            #  {"id":1, "title":"first salad", "description": "a salad"},
-            #  {"id":2, "title":"second salad", "description": "a salad"},
-            #  {"id":3, "title":"third salad", "description": "a salad"}
-            #]
 
             # ESTABLISH DATABASE CONNECTION
 
@@ -86,15 +81,34 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             menu_dot_html = os.path.abspath(__file__).replace(os.path.relpath(__file__), "menu-items/index.html")
             print "READING HTML FILE -- %s" % menu_dot_html
             html_content = BeautifulSoup(open(menu_dot_html),"lxml")
-            menu_item_list = html_content.find(id="menu-item-list")
-            print menu_item_list
 
             # MANIPULATE FILE CONTENTS
 
+            ###menu_item_list = html_content.find(id="menu-item-list")
+            ###print menu_item_list
+            ###for menu_item in menu_items:
+            ###    list_item = html_content.new_tag('li')
+            ###    list_item.string = menu_item["title"]
+            ###    menu_item_list.append(list_item)
+
+            menu_item_table_body = html_content.find(id="menu-item-table-body")
             for menu_item in menu_items:
-                list_item = html_content.new_tag('li')
-                list_item.string = menu_item["title"]
-                menu_item_list.append(list_item)
+                table_row = html_content.new_tag('tr')
+
+                for attr_val in [
+                    menu_item["id"],
+                    menu_item["category"],
+                    menu_item["title"],
+                    menu_item["vegan_safe"],
+                    menu_item["gluten_free"],
+                    menu_item["description"]
+                ]:
+                    #code.interact(local=locals())
+                    table_data = html_content.new_tag('td')
+                    table_data.string = str(attr_val)
+                    table_row.append(table_data)
+
+                menu_item_table_body.append(table_row)
 
             # RETURN HTML CONTENT
 

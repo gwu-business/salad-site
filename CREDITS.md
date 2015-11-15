@@ -26,4 +26,6 @@
  + https://www.quora.com/What-is-an-easy-to-use-HTML-XML-parser-generator-library-in-Python-similar-to-Hpricot-Nokogiri-in-Ruby
  + http://www.crummy.com/software/BeautifulSoup/bs4/doc/
  + http://stackoverflow.com/a/21356230/670433
+ + http://getbootstrap.com/css/#forms
  + http://getbootstrap.com/components/#navbar-default
+ + http://getbootstrap.com/css/#tables
