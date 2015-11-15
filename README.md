@@ -1,7 +1,9 @@
-# Salad System (Python Implementation)
+# Salad System (Python)
 
-An example database-connected web app,
+An example database-connected web application,
  with server-side software written in Python.
+
+Represents a partial implementation of [Salad System Requirements](https://github.com/gwu-business/salad-system-requirements).
 
 ## Usage
 
@@ -44,5 +46,8 @@ Visit [localhost:8818](localhost:8818) in a browser
   to view the menu
   and create new menu items.
 
+## Contributing
+
+[Issues](https://github.com/gwu-business/salad-system-py/issues) and [Pull Requests](https://github.com/gwu-business/salad-system-py/pulls) welcome.
 
 ## [License](LICENSE.md)
