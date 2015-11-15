@@ -21,6 +21,11 @@ from bs4 import BeautifulSoup
 
 PORT = 8818
 
+try:
+    DB_ROOT_PASSWORD = os.environ["MYSQL_ROOT_PASSWORD"] # if your root user has a password, assign it to the "MYSQL_ROOT_PASSWORD" environment variable
+except KeyError as e:
+    DB_ROOT_PASSWORD = "" # most students' root user doesn't have a password
+
 #
 # DEFINE THE LOCAL WEB SERVER
 #
@@ -53,7 +58,7 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 host='localhost',
                 port=3306,
                 user='root',
-                passwd='y0l0', # or change, or leave blank or comment-out
+                passwd= DB_ROOT_PASSWORD,
                 db='salad_db',
                 #charset='utf8mb4',
                 cursorclass=pymysql.cursors.DictCursor
@@ -135,13 +140,25 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
             # TRANSFORM DATA
 
-            category = "SpecialSalad" #todo: form select
+            category = form['category'].value
             title = form['title'].value
             calories = form['calories'].value
-            calories = int(calories)
-            contains_gluten = True #todo: form radio
-            vegan_safe = False #todo: form radio
             description = form['description'].value
+
+            try:
+                gluten_free = True if form['gluten_free'] else False
+            except KeyError as e:
+                gluten_free = False
+
+            try:
+                vegan_safe = True if form['vegan_safe'] else False
+            except KeyError as e:
+                vegan_safe = False
+
+            calories = int(calories)
+            gluten_free = int(gluten_free)
+            vegan_safe = int(vegan_safe)
+
 
             # ESTABLISH DATABASE CONNECTION
 
@@ -149,7 +166,7 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 host='localhost',
                 port=3306,
                 user='root',
-                passwd='y0l0', # or change, or leave blank or comment-out
+                passwd= DB_ROOT_PASSWORD,
                 db='salad_db',
                 #charset='utf8mb4',
                 cursorclass=pymysql.cursors.DictCursor
@@ -162,8 +179,8 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 # CREATE NEW RECORD
 
                 with connection.cursor() as cursor:
-                    sql = "INSERT INTO `menu_items` (`category`,`title`,`calories`,`contains_gluten`,`vegan_safe`,`description`) VALUES (%s, %s, %s, %s, %s, %s)"
-                    cursor.execute(sql, (category, title, calories, contains_gluten, vegan_safe, description)  )
+                    sql = "INSERT INTO `menu_items` (`category`,`title`,`calories`,`gluten_free`,`vegan_safe`,`description`) VALUES (%s, %s, %s, %s, %s, %s)"
+                    cursor.execute(sql, (category, title, calories, gluten_free, vegan_safe, description)  )
                 connection.commit() # to save the changes
 
                 # PRINT NEW RECORD

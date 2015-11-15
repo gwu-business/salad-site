@@ -23,11 +23,24 @@
       <h1>Add a new Menu Item</h1>
 
       <form id="submission-form" action="new.html" method="post">
+
+        <label for="category">Category:</label>
+        <select id="category-selector" name="category">
+          <option value="SignatureSalad">Signature Salad</option>
+          <option value="SignatureGrain">Signature Grain</option>
+          <option value="SeasonalSalad">Seasonal Salad</option>
+          <option value="SeasonalGrain">Seasonal Grain</option>
+        </select>
+
         <label for="title">Title:</label>
         <input id="title-input" type="text" name="title" value="Super Salad" placeholder="Super Salad">
 
         <label for="calories">Calories:</label>
         <input id="calories-input" type="number" name="calories" value="570">
+
+        <label>Vegan Safe? <input id="vegan-safe" type="checkbox" name="vegan-safe" value="vegan_safe"></label>
+
+        <label>Gluten-free? <input id="gluten-free" type="checkbox" name="gluten-free" value="gluten_free"></label>
 
         <label for="description">Description:</label>
         <textarea id="description-input" name="description" rows="8" cols="40" placeholder="A refreshing mix of greens.">A refreshing mix of greens.</textarea>
@@ -40,17 +53,23 @@
       var hostName = window.location.hostname || "UNKOWN HOST"
       console.log(hostName)
 
+      var categorySelector = document.getElementById("category-selector")
       var titleInput = document.getElementById("title-input")
       var caloriesInput = document.getElementById("calories-input")
       var descriptionInput = document.getElementById("description-input")
+      var glutenFreeInput = document.getElementById("gluten-free")
+      var veganSafeInput = document.getElementById("vegan-safe")
       var submissionButton = document.getElementById("submission-button")
       submissionButton.addEventListener("click", submitForm, false)
 
       function submitForm(){
         var menuItem = {
+          category: categorySelector.value,
           title: titleInput.value,
           calories: caloriesInput.value,
-          description: descriptionInput.value
+          description: descriptionInput.value,
+          glutenFree: glutenFreeInput.checked,
+          veganSafeInput: veganSafeInputInput.checked
         }
         console.log("SUBMITTING", menuItem)
       }

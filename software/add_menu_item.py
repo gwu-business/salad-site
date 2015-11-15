@@ -2,6 +2,12 @@
 # ... source: https://github.com/PyMySQL/PyMySQL#example
 
 import pymysql.cursors
+import os
+
+try:
+    DB_ROOT_PASSWORD = os.environ["MYSQL_ROOT_PASSWORD"] # if your root user has a password, assign it to the "MYSQL_ROOT_PASSWORD" environment variable
+except KeyError as e:
+    DB_ROOT_PASSWORD = "" # most students' root user doesn't have a password
 
 # ESTABLISH CONNECTION WITH SALAD DATABASE
 
@@ -9,7 +15,7 @@ connection = pymysql.connect(
     host='localhost',
     port=3306,
     user='root',
-    passwd='y0l0', # or change, or leave blank
+    passwd= DB_ROOT_PASSWORD,
     db='salad_db',
     #charset='utf8mb4',
     cursorclass=pymysql.cursors.DictCursor
@@ -20,7 +26,7 @@ try:
 
         # CREATE A NEW MENU ITEM RECORD
 
-        sql = "INSERT INTO `menu_items` (`category`,`title`,`calories`,`contains_gluten`,`vegan_safe`,`description`) VALUES (%s, %s, %s, %s, %s, %s)"
+        sql = "INSERT INTO `menu_items` (`category`,`title`,`calories`,`gluten_free`,`vegan_safe`,`description`) VALUES (%s, %s, %s, %s, %s, %s)"
         cursor.execute(sql, ('SignatureSalad', 'TEST SALAD',  1111, 0, 1,  'a salad to use when testing the web application.')  )
 
     connection.commit() # connection is not autocommit by default. So you must commit to save your changes.
