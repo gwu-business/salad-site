@@ -8,8 +8,8 @@ An example database-connected web app,
 Download the repository.
 
 ```` sh
-git clone git@github.com:gwu-business/salad-site.git
-cd salad-site
+git clone git@github.com:gwu-business/salad-system-py.git
+cd salad-system-py
 ````
 
 Create a new local database
