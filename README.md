@@ -1,9 +1,21 @@
 # Salad System (Python)
 
 An example database-connected web application,
- with server-side software written in Python.
+ with server-side software written in Python. Represents a partial implementation of [Salad System Requirements](https://github.com/gwu-business/salad-system-requirements).
 
-Represents a partial implementation of [Salad System Requirements](https://github.com/gwu-business/salad-system-requirements).
+Features:
+
+ + Populates the database with menu data.
+ + Stores in the database information captured from a web form.
+ + Produces menu page using data from the database.
+
+![a home page with text that reads 'welcome regional manager'](images/screenshots/0-welcome.png)
+
+![a menu page featuring a table with a row per menu item](images/screenshots/1-menu.png)
+
+![a web form for entering new menu items](images/screenshots/2-new-menu-item-form.png)
+
+![another look at the menu page, which this time includes the recently-added menu item](images/screenshots/3-menu-updated.png)
 
 ## Usage
 
