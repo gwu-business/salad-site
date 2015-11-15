@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Salad Site</title>
     <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../stylesheets/salad-style.css">
   </head>
   <body>
@@ -22,30 +23,58 @@
     <div class="page">
       <h1>Add a new Menu Item</h1>
 
-      <form id="submission-form" action="new.html" method="post">
+      <form id="submission-form" action="new.html" method="post" class="form-horizontal">
+        <div class="form-group">
+          <label for="category" class="col-sm-2 control-label">Category:</label>
+          <div class="col-sm-10">
+            <select id="category-selector" name="category">
+              <option value="SignatureSalad">Signature Salad</option>
+              <option value="SignatureGrain">Signature Grain</option>
+              <option value="SeasonalSalad">Seasonal Salad</option>
+              <option value="SeasonalGrain">Seasonal Grain</option>
+            </select>
+          </div>
+        </div>
 
-        <label for="category">Category:</label>
-        <select id="category-selector" name="category">
-          <option value="SignatureSalad">Signature Salad</option>
-          <option value="SignatureGrain">Signature Grain</option>
-          <option value="SeasonalSalad">Seasonal Salad</option>
-          <option value="SeasonalGrain">Seasonal Grain</option>
-        </select>
+        <div class="form-group">
+          <label for="title" class="col-sm-2 control-label">Title:</label>
+          <div class="col-sm-10">
+            <input id="title-input" type="text" name="title" value="Super Salad" placeholder="Super Salad">
+          </div>
+        </div>
 
-        <label for="title">Title:</label>
-        <input id="title-input" type="text" name="title" value="Super Salad" placeholder="Super Salad">
+        <div class="form-group">
+          <label for="calories" class="col-sm-2 control-label">Calories:</label>
+          <div class="col-sm-10">
+            <input id="calories-input" type="number" name="calories" value="570">
+          </div>
+        </div>
 
-        <label for="calories">Calories:</label>
-        <input id="calories-input" type="number" name="calories" value="570">
+        <div class="form-group">
+          <label for="vegan-safe" class="col-sm-2 control-label">Vegan Safe?</label>
+          <div class="col-sm-10">
+            <input id="vegan-safe" type="checkbox" name="vegan-safe" value="vegan_safe">
+          </div>
+        </div>
 
-        <label>Vegan Safe? <input id="vegan-safe" type="checkbox" name="vegan-safe" value="vegan_safe"></label>
+        <div class="form-group">
+          <label for="gluten-free" class="col-sm-2 control-label">Gluten-free?</label>
+          <div class="col-sm-10">
+            <input id="gluten-free" type="checkbox" name="gluten-free" value="gluten_free">
+          </div>
+        </div>
 
-        <label>Gluten-free? <input id="gluten-free" type="checkbox" name="gluten-free" value="gluten_free"></label>
+        <div class="form-group">
+          <label for="description" class="col-sm-2 control-label">Description:</label>
+          <div class="col-sm-10">
+            <textarea id="description-input" name="description" rows="8" cols="40" placeholder="A refreshing mix of greens.">A refreshing mix of greens.</textarea>
+          </div>
 
-        <label for="description">Description:</label>
-        <textarea id="description-input" name="description" rows="8" cols="40" placeholder="A refreshing mix of greens.">A refreshing mix of greens.</textarea>
-
-        <button id="submission-button">Submit POST</button>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+              <button id="submission-button" type="submit" class="btn btn-default">Submit</button>
+          </div>
+        </div>
       </form>
     </div>
 
