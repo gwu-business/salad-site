@@ -1,5 +1,4 @@
 # to run from root dir: `python software/read_html_file.py`
-# source: https://wiki.python.org/moin/MiniDom
 
 import code # to debug: `code.interact(local=locals())`
 import os
