@@ -1,5 +1,6 @@
 /* MIGRATE SALAD DATABASE */
 
+DROP TABLE IF EXISTS `menu_items`;
 CREATE TABLE `menu_items` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `category` varchar(255) NOT NULL,
